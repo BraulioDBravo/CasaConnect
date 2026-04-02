@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Connect — Domótica Profesional · Bahía Blanca</title>
+<meta name="description" content="Control inteligente de luces, persianas, clima y seguridad desde tu celular. Instalación profesional en Bahía Blanca. Visita técnica sin cargo.">
+<meta name="keywords" content="domotica bahia blanca, casa inteligente bahia blanca, home assistant argentina, losa radiante electrica bahia blanca">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARIABLES ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --azul:    #0A1628;
+  --azulm:   #1565C0;
+  --azulv:   #1976D2;
+  --cian:    #00B4D8;
+  --blanco:  #FFFFFF;
+  --gris:    #546E7A;
+  --gris-l:  #F0F6FF;
+  --azul-l:  #E3F2FD;
+  --acento:  #64B5F6;
+  --naranja: #FF6D00;
+  --grad: linear-gradient(135deg, #0A1628 0%, #0D2137 50%, #0A1628 100%);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--blanco);
+  color: var(--azul);
+  overflow-x: hidden;
+}
+
+/* ── TIPOGRAFÍA ────────────────────────────────────────────── */
+h1, h2, h3, h4 { font-family: 'Syne', sans-serif; line-height: 1.1; }
+
+/* ── NAV ───────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+  background: rgba(10, 22, 40, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(100, 181, 246, 0.1);
+  transition: all .3s;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 22px; letter-spacing: -0.5px;
+  color: var(--blanco); text-decoration: none; display: flex; align-items: center; gap: 10px;
+}
+.nav-logo .logo-icon {
+  width: 36px; height: 36px; background: var(--azulv); border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo span { color: var(--acento); font-weight: 300; }
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none; font-size: 15px;
+  font-weight: 400; letter-spacing: 0.2px; transition: color .2s;
+}
+.nav-links a:hover { color: var(--acento); }
+
+.nav-cta {
+  background: var(--azulv); color: var(--blanco);
+  padding: 10px 22px; border-radius: 8px; text-decoration: none;
+  font-weight: 500; font-size: 14px; transition: all .2s;
+  border: 1px solid transparent;
+}
+.nav-cta:hover { background: #1E88E5; transform: translateY(-1px); }
+
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--grad);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  padding: 100px 5vw 80px;
+}
+
+/* Fondo animado */
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.hero-bg .circle {
+  position: absolute; border-radius: 50%;
+  animation: pulse 8s ease-in-out infinite;
+}
+.hero-bg .c1 {
+  width: 700px; height: 700px;
+  top: -200px; right: -200px;
+  background: radial-gradient(circle, rgba(25,118,210,.18) 0%, transparent 65%);
+  animation-delay: 0s;
+}
+.hero-bg .c2 {
+  width: 500px; height: 500px;
+  bottom: -150px; left: -100px;
+  background: radial-gradient(circle, rgba(0,180,216,.12) 0%, transparent 65%);
+  animation-delay: 3s;
+}
+.hero-bg .c3 {
+  width: 300px; height: 300px;
+  top: 40%; left: 40%;
+  background: radial-gradient(circle, rgba(100,181,246,.07) 0%, transparent 65%);
+  animation-delay: 5s;
+}
+.hero-bg .dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(100,181,246,.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hero-bg .line {
+  position: absolute; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(100,181,246,.12), transparent);
+}
+.hero-bg .l1 { top: 30%; }
+.hero-bg .l2 { top: 60%; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) translate(0,0); opacity: 1; }
+  50% { transform: scale(1.08) translate(10px, -10px); opacity: 0.8; }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(33,150,243,.12); border: 1px solid rgba(100,181,246,.25);
+  border-radius: 100px; padding: 7px 18px; margin-bottom: 32px;
+  font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+  color: var(--acento); text-transform: uppercase;
+  animation: fadeUp .8s ease both;
+}
+.hero-badge .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--cian);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+.hero h1 {
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 800; letter-spacing: -3px; color: var(--blanco);
+  line-height: 1; margin-bottom: 8px;
+  animation: fadeUp .8s .1s ease both;
+}
+.hero h1 .accent { color: var(--acento); font-weight: 300; }
+
+.hero-sub {
+  font-size: clamp(18px, 2vw, 22px); font-weight: 300;
+  color: rgba(255,255,255,.55); letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp .8s .2s ease both;
+}
+
+.hero-desc {
+  font-size: 18px; font-weight: 300; line-height: 1.7;
+  color: rgba(255,255,255,.7); max-width: 540px; margin-bottom: 40px;
+  animation: fadeUp .8s .3s ease both;
+}
+.hero-desc strong { color: var(--blanco); font-weight: 500; }
+
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp .8s .4s ease both;
+}
+.btn-primary {
+  background: var(--azulv); color: var(--blanco);
+  padding: 15px 32px; border-radius: 10px; text-decoration: none;
+  font-weight: 600; font-size: 16px; letter-spacing: .2px;
+  transition: all .25s; border: 1px solid transparent;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: #1E88E5; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25,118,210,.4); }
+.btn-outline {
+  border: 1px solid rgba(100,181,246,.3); color: var(--acento);
+  padding: 15px 32px; border-radius: 10px; text-decoration: none;
+  font-weight: 400; font-size: 16px; transition: all .25s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-outline:hover { background: rgba(100,181,246,.1); transform: translateY(-2px); }
+
+.hero-stats {
+  position: absolute; right: 5vw; bottom: 60px; z-index: 2;
+  display: flex; gap: 2px; animation: fadeUp .8s .6s ease both;
+}
+.stat-card {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(100,181,246,.12);
+  padding: 22px 28px; text-align: center;
+  backdrop-filter: blur(8px);
+}
+.stat-card:first-child { border-radius: 14px 0 0 14px; }
+.stat-card:last-child { border-radius: 0 14px 14px 0; }
+.stat-num {
+  font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+  color: var(--blanco); letter-spacing: -1px; line-height: 1;
+}
+.stat-lbl { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 4px; letter-spacing: .5px; }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: fadeUp 1s .8s ease both;
+}
+.scroll-hint span { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,.3); text-transform: uppercase; }
+.scroll-arrow { width: 20px; height: 20px; border-right: 2px solid rgba(100,181,246,.4); border-bottom: 2px solid rgba(100,181,246,.4); transform: rotate(45deg); animation: arrowBounce 1.5s ease-in-out infinite; }
+@keyframes arrowBounce { 0%,100%{transform:rotate(45deg) translate(0,0);} 50%{transform:rotate(45deg) translate(4px,4px);} }
+
+/* ── LOGOS COMPATIBLES ─────────────────────────────────────── */
+.compat {
+  background: var(--azul); padding: 28px 5vw;
+  border-bottom: 1px solid rgba(100,181,246,.08);
+}
+.compat-inner {
+  display: flex; align-items: center; gap: 40px;
+  max-width: 1200px; margin: 0 auto; overflow: hidden;
+}
+.compat-lbl {
+  font-size: 11px; letter-spacing: 2.5px; color: rgba(255,255,255,.3);
+  text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+}
+.compat-divider { width: 1px; height: 28px; background: rgba(100,181,246,.15); flex-shrink: 0; }
+.compat-logos {
+  display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
+}
+.compat-logo {
+  font-size: 14px; font-weight: 600; color: rgba(255,255,255,.35);
+  letter-spacing: .5px; white-space: nowrap; transition: color .2s;
+}
+.compat-logo:hover { color: rgba(255,255,255,.7); }
+
+/* ── SECCIONES GENERALES ───────────────────────────────────── */
+section { padding: 100px 5vw; }
+
+.section-tag {
+  font-size: 11px; letter-spacing: 3px; color: var(--azulv);
+  text-transform: uppercase; font-weight: 500; margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(36px, 4vw, 52px); font-weight: 800;
+  letter-spacing: -2px; color: var(--azul); margin-bottom: 16px;
+  line-height: 1.05;
+}
+.section-title .accent { color: var(--azulv); font-weight: 300; }
+.section-desc {
+  font-size: 18px; font-weight: 300; color: var(--gris);
+  line-height: 1.7; max-width: 600px; margin-bottom: 60px;
+}
+
+/* ── SERVICIOS ─────────────────────────────────────────────── */
+#servicios { background: var(--gris-l); }
+
+.servicios-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+  max-width: 1200px; margin: 0 auto;
+}
+.serv-card {
+  background: var(--blanco); border-radius: 20px;
+  padding: 36px 32px; border: 1px solid rgba(25,118,210,.1);
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: all .3s;
+}
+.serv-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--azulv), var(--cian));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.serv-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(25,118,210,.12); border-color: rgba(25,118,210,.2); }
+.serv-card:hover::before { transform: scaleX(1); }
+.serv-card.featured { background: var(--azul); border-color: var(--azulv); }
+.serv-card.featured:hover { box-shadow: 0 24px 48px rgba(25,118,210,.3); }
+
+.serv-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 22px;
+  background: var(--azul-l);
+}
+.serv-card.featured .serv-icon { background: rgba(100,181,246,.15); }
+
+.serv-tag {
+  font-size: 10px; letter-spacing: 2px; color: var(--azulv);
+  text-transform: uppercase; font-weight: 600; margin-bottom: 10px;
+}
+.serv-card.featured .serv-tag { color: var(--acento); }
+
+.serv-name {
+  font-size: 22px; font-weight: 700; color: var(--azul);
+  margin-bottom: 12px; letter-spacing: -.5px;
+}
+.serv-card.featured .serv-name { color: var(--blanco); }
+
+.serv-desc {
+  font-size: 15px; color: var(--gris); line-height: 1.6; margin-bottom: 20px;
+}
+.serv-card.featured .serv-desc { color: rgba(255,255,255,.6); }
+
+.serv-price {
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700;
+  color: var(--azulv);
+}
+.serv-card.featured .serv-price { color: var(--acento); }
+.serv-price small { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; color: var(--gris); display: block; margin-top: 2px; }
+.serv-card.featured .serv-price small { color: rgba(255,255,255,.4); }
+
+/* ── CÓMO FUNCIONA ─────────────────────────────────────────── */
+#como { background: var(--blanco); }
+.como-inner { max-width: 1200px; margin: 0 auto; }
+
+.pasos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+.pasos-grid::before {
+  content: ''; position: absolute;
+  top: 36px; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--azul-l), transparent);
+}
+
+.paso {
+  text-align: center; padding: 0 16px; position: relative;
+}
+.paso-num {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--azul-l); border: 2px solid rgba(25,118,210,.15);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--azulv);
+  position: relative; z-index: 1; transition: all .3s;
+}
+.paso:hover .paso-num { background: var(--azulv); color: var(--blanco); transform: scale(1.1); }
+.paso-icon { font-size: 22px; position: absolute; bottom: -8px; right: -4px; }
+.paso-title { font-weight: 700; font-size: 16px; color: var(--azul); margin-bottom: 8px; }
+.paso-desc { font-size: 13px; color: var(--gris); line-height: 1.6; }
+
+/* ── PAQUETES ──────────────────────────────────────────────── */
+#paquetes { background: var(--azul); position: relative; overflow: hidden; }
+#paquetes::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(25,118,210,.15) 0%, transparent 65%);
+}
+#paquetes .section-title { color: var(--blanco); }
+#paquetes .section-tag { color: var(--acento); }
+#paquetes .section-desc { color: rgba(255,255,255,.5); }
+
+.paq-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+}
+.paq-card {
+  border-radius: 22px; padding: 36px 32px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(100,181,246,.12);
+  position: relative; overflow: hidden; transition: all .3s;
+}
+.paq-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.08); }
+.paq-card.highlight {
+  background: rgba(25,118,210,.25); border-color: rgba(25,118,210,.4);
+}
+.paq-card.highlight:hover { background: rgba(25,118,210,.3); }
+
+.paq-badge {
+  display: inline-block; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; font-weight: 700;
+  padding: 4px 12px; border-radius: 100px; margin-bottom: 20px;
+}
+.paq-badge.popular { background: rgba(0,180,216,.2); color: var(--cian); }
+.paq-badge.basic { background: rgba(255,255,255,.07); color: rgba(255,255,255,.4); }
+.paq-badge.premium { background: rgba(100,181,246,.15); color: var(--acento); }
+
+.paq-icon { font-size: 36px; margin-bottom: 16px; }
+.paq-name { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--blanco); margin-bottom: 6px; letter-spacing: -.5px; }
+.paq-for { font-size: 13px; color: rgba(255,255,255,.4); margin-bottom: 24px; line-height: 1.5; }
+
+.paq-price-wrap { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(100,181,246,.1); }
+.paq-from { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.35); text-transform: uppercase; }
+.paq-price { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: var(--blanco); letter-spacing: -2px; line-height: 1; }
+.paq-price .curr { font-size: 20px; vertical-align: super; font-weight: 400; }
+.paq-note { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 4px; }
+
+.paq-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.paq-features li {
+  font-size: 14px; color: rgba(255,255,255,.7); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+}
+.paq-features li::before { content: '→'; color: var(--acento); flex-shrink: 0; font-weight: 700; }
+
+.paq-btn {
+  display: block; text-align: center; padding: 13px 24px;
+  border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px;
+  transition: all .25s;
+}
+.paq-btn.main { background: var(--azulv); color: var(--blanco); }
+.paq-btn.main:hover { background: #1E88E5; transform: translateY(-1px); }
+.paq-btn.outline { border: 1px solid rgba(100,181,246,.25); color: var(--acento); }
+.paq-btn.outline:hover { background: rgba(100,181,246,.1); }
+
+.paq-note-bottom {
+  text-align: center; margin-top: 40px; font-size: 14px;
+  color: rgba(255,255,255,.35); position: relative; z-index: 1;
+}
+
+/* ── NOSOTROS ──────────────────────────────────────────────── */
+#nosotros { background: var(--gris-l); }
+.nosotros-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.nosotros-text {}
+.nosotros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.nos-card {
+  background: var(--blanco); border-radius: 16px; padding: 24px;
+  border: 1px solid rgba(25,118,210,.1); transition: all .25s;
+}
+.nos-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(25,118,210,.08); }
+.nos-num { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; color: var(--azul-l); line-height: 1; margin-bottom: 8px; }
+.nos-title { font-size: 15px; font-weight: 700; color: var(--azul); margin-bottom: 6px; }
+.nos-desc { font-size: 13px; color: var(--gris); line-height: 1.6; }
+
+/* ── CONTACTO ──────────────────────────────────────────────── */
+#contacto { background: var(--blanco); }
+.contacto-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--azul); margin-bottom: 6px; letter-spacing: .3px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 13px 16px; border-radius: 10px;
+  border: 1.5px solid rgba(25,118,210,.15); background: var(--gris-l);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--azul);
+  transition: all .2s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--azulv); background: var(--blanco);
+  box-shadow: 0 0 0 3px rgba(25,118,210,.1);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select { appearance: none; cursor: pointer; }
+
+.btn-submit {
+  width: 100%; padding: 15px; background: var(--azulv); color: var(--blanco);
+  border: none; border-radius: 10px; font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer; transition: all .25s;
+  display: flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: .3px;
+}
+.btn-submit:hover { background: #1E88E5; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25,118,210,.3); }
+
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-block {
+  background: var(--gris-l); border-radius: 16px; padding: 28px 28px;
+  border: 1px solid rgba(25,118,210,.08);
+}
+.cb-title { font-size: 13px; font-weight: 600; color: var(--gris); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.cb-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.cb-item:last-child { margin-bottom: 0; }
+.cb-icon { font-size: 18px; flex-shrink: 0; }
+.cb-text { font-size: 15px; color: var(--azul); font-weight: 400; }
+.cb-text a { color: var(--azulv); text-decoration: none; }
+.cb-text a:hover { text-decoration: underline; }
+
+.whatsapp-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #25D366; color: var(--blanco); padding: 14px 24px;
+  border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 16px;
+  transition: all .25s;
+}
+.whatsapp-btn:hover { background: #22BF5A; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,.3); }
+
+/* ── FOOTER ────────────────────────────────────────────────── */
+footer {
+  background: var(--azul); padding: 48px 5vw 32px;
+  border-top: 1px solid rgba(100,181,246,.08);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--blanco); }
+.footer-logo span { color: var(--acento); font-weight: 300; }
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: rgba(255,255,255,.8); }
+.footer-note { font-size: 12px; color: rgba(255,255,255,.2); margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(100,181,246,.08); text-align: center; }
+
+/* ── ANIMACIONES ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hero-stats { display: none; }
+  .paq-grid { grid-template-columns: 1fr; }
+  .nosotros-inner { grid-template-columns: 1fr; }
+  .contacto-inner { grid-template-columns: 1fr; }
+  .pasos-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pasos-grid::before { display: none; }
+}
+@media (max-width: 600px) {
+  section { padding: 70px 5vw; }
+  .servicios-grid { grid-template-columns: 1fr; }
+  .nosotros-grid { grid-template-columns: 1fr; }
+  .pasos-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg width="22" height="22" viewBox="0 0 72 72" fill="none">
+        <rect x="10" y="34" width="52" height="32" rx="4" fill="white" opacity=".9"/>
+        <path d="M4 36 L36 6 L68 36" fill="white"/>
+        <rect x="28" y="46" width="16" height="20" rx="3" fill="#1565C0"/>
+        <path d="M18 22 Q36 6 54 22" stroke="#00B4D8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M23 27 Q36 14 49 27" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <circle cx="36" cy="31" r="3" fill="white"/>
+      </svg>
+    </div>
+    Casa<span>Connect</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como">Cómo funciona</a></li>
+    <li><a href="#paquetes">Paquetes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/549291XXXXXXX" class="nav-cta" target="_blank">💬 Consultar</a>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────── -->
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <div class="dots"></div>
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+    <div class="line l1"></div>
+    <div class="line l2"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      Domótica profesional en Bahía Blanca
+    </div>
+    <h1>Tu hogar,<br><span class="accent">inteligente</span><br>y conectado.</h1>
+    <p class="hero-sub">Casa Connect</p>
+    <p class="hero-desc">
+      Controlá <strong>luces, persianas, clima y seguridad</strong> desde el celular o con tu voz.
+      Instalación profesional sin obras. En 1 o 2 días.
+    </p>
+    <div class="hero-btns">
+      <a href="#paquetes" class="btn-primary">Ver paquetes →</a>
+      <a href="#como" class="btn-outline">Cómo funciona</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">50+</div>
+      <div class="stat-lbl">Instalaciones</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5★</div>
+      <div class="stat-lbl">Calificación</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">6m</div>
+      <div class="stat-lbl">Garantía</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">24h</div>
+      <div class="stat-lbl">Soporte</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ── COMPATIBLES ──────────────────────────────────────────── -->
+<div class="compat">
+  <div class="compat-inner">
+    <span class="compat-lbl">Compatible con</span>
+    <div class="compat-divider"></div>
+    <div class="compat-logos">
+      <span class="compat-logo">Home Assistant</span>
+      <span class="compat-logo">Shelly</span>
+      <span class="compat-logo">Google Home</span>
+      <span class="compat-logo">Amazon Alexa</span>
+      <span class="compat-logo">Matter</span>
+      <span class="compat-logo">Zigbee</span>
+      <span class="compat-logo">Apple HomeKit</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICIOS ────────────────────────────────────────────── -->
+<section id="servicios">
+  <div class="section-tag reveal">Lo que hacemos</div>
+  <h2 class="section-title reveal">Todo lo que tu <span class="accent">hogar</span><br>necesita</h2>
+  <p class="section-desc reveal">Soluciones integrales de domótica y climatización para casas y countries en Bahía Blanca y alrededores.</p>
+
+  <div class="servicios-grid">
+    <div class="serv-card featured reveal">
+      <div class="serv-icon">💡</div>
+      <div class="serv-tag">El más solicitado</div>
+      <div class="serv-name">Domótica residencial</div>
+      <div class="serv-desc">Luces, persianas, clima y seguridad unificados en una sola app. Control desde el celular o por voz desde cualquier lugar del mundo.</div>
+      <div class="serv-price">Desde USD 350 <small>mano de obra · materiales aparte</small></div>
+    </div>
+    <div class="serv-card reveal">
+      <div class="serv-icon">🔥</div>
+      <div class="serv-tag">Climatización</div>
+      <div class="serv-name">Losa radiante eléctrica inteligente</div>
+      <div class="serv-desc">Calefacción por piso con control inteligente por zona. Termostatos WiFi integrados a Home Assistant. Ideal para el invierno bahiense.</div>
+      <div class="serv-price">Desde USD 800 <small>por zona · presupuesto personalizado</small></div>
+    </div>
+    <div class="serv-card reveal">
+      <div class="serv-icon">🔒</div>
+      <div class="serv-tag">Seguridad</div>
+      <div class="serv-name">Seguridad inteligente</div>
+      <div class="serv-desc">Cámaras IP con grabación local, sensores de puertas y movimiento, portón y alarma integrada. Notificaciones en tiempo real.</div>
+      <div class="serv-price">Desde USD 500 <small>mano de obra · materiales aparte</small></div>
+    </div>
+    <div class="serv-card reveal">
+      <div class="serv-icon">⚡</div>
+      <div class="serv-tag">Eficiencia</div>
+      <div class="serv-name">Monitoreo energético</div>
+      <div class="serv-desc">Medición del consumo eléctrico en tiempo real por zona. Detectá gastos innecesarios y ahorrá hasta un 30% en tu factura.</div>
+      <div class="serv-price">Desde USD 280 <small>mano de obra · materiales aparte</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ─────────────────────────────────────────── -->
+<section id="como">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-tag reveal">El proceso</div>
+    <h2 class="section-title reveal">Simple, rápido<br><span class="accent">y sin sorpresas</span></h2>
+    <p class="section-desc reveal">Desde que nos contactás hasta que controlás tu casa desde el celular — todo en pocos días.</p>
+
+    <div class="pasos-grid">
+      <div class="paso reveal">
+        <div class="paso-num">01 <span class="paso-icon">💬</span></div>
+        <div class="paso-title">Nos contactás</div>
+        <div class="paso-desc">Por WhatsApp o Instagram. Respondemos en menos de 2 horas en horario laboral.</div>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">02 <span class="paso-icon">🔍</span></div>
+        <div class="paso-title">Visita técnica</div>
+        <div class="paso-desc">Sin cargo. Relevamos tu casa y entendemos exactamente qué necesitás.</div>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">03 <span class="paso-icon">📋</span></div>
+        <div class="paso-title">Presupuesto</div>
+        <div class="paso-desc">Detallado en 48hs. Materiales y mano de obra por separado. Sin costos ocultos.</div>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">04 <span class="paso-icon">🔧</span></div>
+        <div class="paso-title">Instalación</div>
+        <div class="paso-desc">1 o 2 días de trabajo prolijo. Sin romper paredes. Sin alterar tu rutina.</div>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">05 <span class="paso-icon">🎓</span></div>
+        <div class="paso-title">Capacitación</div>
+        <div class="paso-desc">Te enseñamos todo. Garantía de 6 meses y soporte por WhatsApp incluido.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAQUETES ──────────────────────────────────────────────── -->
+<section id="paquetes">
+  <div class="section-tag reveal">Precios</div>
+  <h2 class="section-title reveal">Elegí el paquete<br><span class="accent">que mejor te queda</span></h2>
+  <p class="section-desc reveal">Tres opciones para cada hogar y presupuesto. Materiales cotizados por separado según la instalación.</p>
+
+  <div class="paq-grid">
+    <!-- Starter -->
+    <div class="paq-card reveal">
+      <span class="paq-badge basic">Starter</span>
+      <div class="paq-icon">🌱</div>
+      <div class="paq-name">Starter</div>
+      <div class="paq-for">Para conocer la domótica. Departamentos y casas chicas.</div>
+      <div class="paq-price-wrap">
+        <div class="paq-from">Mano de obra desde</div>
+        <div class="paq-price"><span class="curr">USD </span>350</div>
+        <div class="paq-note">+ materiales según instalación</div>
+      </div>
+      <ul class="paq-features">
+        <li>Hasta 6 puntos de luz inteligentes</li>
+        <li>Control desde celular Android e iOS</li>
+        <li>2 automatizaciones básicas</li>
+        <li>Integración Google Home o Alexa</li>
+        <li>Capacitación de 1 hora</li>
+        <li>Garantía 3 meses</li>
+      </ul>
+      <a href="#contacto" class="paq-btn outline">Consultar →</a>
+    </div>
+
+    <!-- Hogar -->
+    <div class="paq-card highlight reveal">
+      <span class="paq-badge popular">★ El más elegido</span>
+      <div class="paq-icon">🏆</div>
+      <div class="paq-name">Hogar</div>
+      <div class="paq-for">Para casas de countries y barrios. La experiencia completa.</div>
+      <div class="paq-price-wrap">
+        <div class="paq-from">Mano de obra desde</div>
+        <div class="paq-price"><span class="curr">USD </span>850</div>
+        <div class="paq-note">+ materiales según instalación</div>
+      </div>
+      <ul class="paq-features">
+        <li>Hasta 15 puntos de luz</li>
+        <li>Control de persianas motorizadas</li>
+        <li>Sensores de movimiento y temperatura</li>
+        <li>Control de aire acondicionado</li>
+        <li>Hub Home Assistant incluido</li>
+        <li>5 automatizaciones personalizadas</li>
+        <li>Dashboard en tablet (opcional)</li>
+        <li>Garantía 6 meses</li>
+      </ul>
+      <a href="#contacto" class="paq-btn main">Solicitar presupuesto →</a>
+    </div>
+
+    <!-- Premium -->
+    <div class="paq-card reveal">
+      <span class="paq-badge premium">Premium</span>
+      <div class="paq-icon">💎</div>
+      <div class="paq-name">Premium</div>
+      <div class="paq-for">Casas grandes, countries y obras nuevas. Sin límites.</div>
+      <div class="paq-price-wrap">
+        <div class="paq-from">Mano de obra desde</div>
+        <div class="paq-price"><span class="curr">USD </span>1.800</div>
+        <div class="paq-note">+ materiales según instalación</div>
+      </div>
+      <ul class="paq-features">
+        <li>Puntos de luz ilimitados</li>
+        <li>Cámaras IP con grabación local</li>
+        <li>Control de portón y acceso</li>
+        <li>Monitor de consumo en tiempo real</li>
+        <li>Panel táctil de pared incluido</li>
+        <li>Automatizaciones ilimitadas</li>
+        <li>Riego automático de jardín</li>
+        <li>Garantía 12 meses</li>
+      </ul>
+      <a href="#contacto" class="paq-btn outline">Consultar →</a>
+    </div>
+  </div>
+
+  <p class="paq-note-bottom reveal">
+    Precios en USD · Pago en pesos al tipo de cambio del día · Visita técnica sin cargo en Bahía Blanca y alrededores
+  </p>
+</section>
+
+<!-- ── NOSOTROS ──────────────────────────────────────────────── -->
+<section id="nosotros">
+  <div class="nosotros-inner">
+    <div class="nosotros-text">
+      <div class="section-tag reveal">Quiénes somos</div>
+      <h2 class="section-title reveal">Electricistas<br><span class="accent">y tecnólogos</span></h2>
+      <p class="section-desc reveal" style="margin-bottom:0;">
+        Casa Connect nació en Bahía Blanca de la combinación de dos pasiones: la electricidad y la tecnología. Somos técnicos electricistas matriculados con años de experiencia en instalaciones residenciales en la región.
+      </p>
+    </div>
+    <div class="nosotros-grid">
+      <div class="nos-card reveal">
+        <div class="nos-num">01</div>
+        <div class="nos-title">Electricistas matriculados</div>
+        <div class="nos-desc">No solo "tecnólogos". Tenemos matrícula habilitante en la provincia de Buenos Aires.</div>
+      </div>
+      <div class="nos-card reveal">
+        <div class="nos-num">02</div>
+        <div class="nos-title">100% locales</div>
+        <div class="nos-desc">De Bahía Blanca. Conocemos los barrios, los countries y las necesidades de la región.</div>
+      </div>
+      <div class="nos-card reveal">
+        <div class="nos-num">03</div>
+        <div class="nos-title">Garantía real</div>
+        <div class="nos-desc">Hasta 12 meses de garantía en mano de obra y soporte por WhatsApp incluido.</div>
+      </div>
+      <div class="nos-card reveal">
+        <div class="nos-num">04</div>
+        <div class="nos-title">Total transparencia</div>
+        <div class="nos-desc">Presupuesto detallado antes de empezar. Sin costos ocultos ni sorpresas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ──────────────────────────────────────────────── -->
+<section id="contacto">
+  <div class="section-tag reveal">Hablemos</div>
+  <h2 class="section-title reveal">¿Empezamos<br><span class="accent">tu proyecto?</span></h2>
+  <p class="section-desc reveal">Contanos qué necesitás y coordinamos una visita técnica sin cargo.</p>
+
+  <div class="contacto-inner">
+    <form class="reveal" onsubmit="handleForm(event)">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" placeholder="Tu nombre" required>
+      </div>
+      <div class="form-group">
+        <label>WhatsApp *</label>
+        <input type="tel" placeholder="+54 9 291 XXX-XXXX" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com">
+      </div>
+      <div class="form-group">
+        <label>Servicio de interés</label>
+        <select>
+          <option value="">Seleccionar...</option>
+          <option>Domótica residencial</option>
+          <option>Losa radiante eléctrica</option>
+          <option>Seguridad inteligente</option>
+          <option>Monitoreo energético</option>
+          <option>No sé todavía — quiero asesoramiento</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Tipo de propiedad, cantidad de ambientes, qué querés automatizar..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">
+        Enviar consulta →
+      </button>
+    </form>
+
+    <div class="contact-info reveal">
+      <a href="https://wa.me/549291XXXXXXX" class="whatsapp-btn" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+
+      <div class="contact-block">
+        <div class="cb-title">Información de contacto</div>
+        <div class="cb-item"><span class="cb-icon">📱</span><span class="cb-text"><a href="https://wa.me/549291XXXXXXX" target="_blank">+54 9 291 XXX-XXXX</a></span></div>
+        <div class="cb-item"><span class="cb-icon">📸</span><span class="cb-text"><a href="https://instagram.com/casaconnect" target="_blank">@casaconnect</a></span></div>
+        <div class="cb-item"><span class="cb-icon">🌐</span><span class="cb-text"><a href="https://casaconnect.com.ar">casaconnect.com.ar</a></span></div>
+        <div class="cb-item"><span class="cb-icon">📍</span><span class="cb-text">Bahía Blanca, Buenos Aires, Argentina</span></div>
+      </div>
+
+      <div class="contact-block">
+        <div class="cb-title">Horario de atención</div>
+        <div class="cb-item"><span class="cb-icon">🗓️</span><span class="cb-text">Lunes a Viernes: 8:00 – 20:00hs</span></div>
+        <div class="cb-item"><span class="cb-icon">🗓️</span><span class="cb-text">Sábados: 9:00 – 14:00hs</span></div>
+        <div class="cb-item"><span class="cb-icon">⚡</span><span class="cb-text">Respondemos en menos de 2 horas</span></div>
+        <div class="cb-item"><span class="cb-icon">📍</span><span class="cb-text">Visita técnica sin cargo en BB y alrededores (hasta 80km)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Casa<span>Connect</span></div>
+    <div class="footer-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://instagram.com/casaconnect" target="_blank">@casaconnect</a>
+    </div>
+  </div>
+  <div class="footer-note">
+    © 2025 Casa Connect · Domótica profesional · Bahía Blanca, Buenos Aires, Argentina · casaconnect.com.ar
+  </div>
+</footer>
+
+<!-- ── JS ───────────────────────────────────────────────────── -->
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.style.background = window.scrollY > 80
+    ? 'rgba(10,22,40,0.98)' : 'rgba(10,22,40,0.92)';
+});
+
+// Form submit
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.textContent = '✓ Consulta enviada — te respondemos pronto';
+  btn.style.background = '#22BF5A';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
